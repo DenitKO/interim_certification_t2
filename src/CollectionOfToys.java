@@ -1,16 +1,14 @@
-import java.awt.*;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.PriorityQueue;
 import java.util.Random;
-import java.util.stream.IntStream;
 
-public class CollectionOfToys {
+public class CollectionOfToys<E> {
     private static int countOfToys;
-    private ArrayList listOfToys;
-    private static int length;
+    private ArrayList<Toy> listOfToys = new ArrayList<>();
+    private static int size;
 
     {
-        length +=1;
+        size +=1;
     }
 
     public void CollectionOfToys()
@@ -21,37 +19,52 @@ public class CollectionOfToys {
     public void add (Toy toy){
         this.listOfToys.add(toy);
         this.countOfToys += toy.getCount();
+        size +=1;
     }
-    public char DrawingOfPrizes(char[] values, int[] weights)
+    public String DrawingOfPrizes()
     {
-        int total = IntStream.of(weights).sum();
+        ArrayList<String> values = new ArrayList(size);
+        ArrayList<Integer> weights = new ArrayList(size);
+        for (Toy toy : this.listOfToys) {
+            values.add(toy.getName());
+            weights.add(toy.getRandomRatio());
+        }
+
+        int total=0;
+        for (int weight : weights) {
+            total += weight;
+        }
+        System.out.println("Total weight: " + total);
+
         int n = 0;
-        char myFinish = '0';
 
         int num = new Random().nextInt(total- 1)+1;
-        System.out.println(num);
+        System.out.println("Rand num: " + num);
 
-        for (int i = 0; i < values.length; i++) {
-            n += weights[i];
+        for (int i = 0; i < values.size(); i++) {
+            n += weights.get(i);
+            System.out.println(n);
             if ( n >= num )
             {
-                return values[i];
+                return values.get(i);
             }
         }
-        return myFinish;
+        return "";
     }
 
     public static int getLenth() {
-        return length;
+        return size;
     }
 
     public void clear(){
         this.listOfToys.clear();
-        this.length = 0;
+        this.size = 0;
     }
 
     public void remove (Toy toy){
+        // understand how to override equals and hashcode in toys for correct work remove metod
         this.listOfToys.remove(toy);
-        this.length -= 1;
+        this.size -= 1;
     }
+
 }

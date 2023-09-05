@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Toy implements Comparable<Toy>{
     private static int id_counter = 0;
     private final int id;
@@ -36,7 +38,7 @@ public class Toy implements Comparable<Toy>{
         return this.name;
     }
 
-    public int getCount() { return count; }
+    public int getCount() { return this.count; }
 
     public void setCount(int count) {
         if (count > 0){
@@ -61,8 +63,19 @@ public class Toy implements Comparable<Toy>{
     public String toString(){
         return "Toy{" +
                 "id=" + this.id +
+                ", count=" + count +
                 ", name='" + name + '\'' +
                 ", randomRatio=" + randomRatio +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, count, name, randomRatio);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }
