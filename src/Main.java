@@ -18,9 +18,10 @@ public class Main {
         myCollection.add(myToy3);
         myCollection.add(myToy4);
         myCollection.add(myToy5);
-        System.out.println(myToy1);
+
+//        System.out.println(myToy1);
 //        System.out.println(myCollection);
-        System.out.println(myCollection.DrawingOfPrizes());
+//        System.out.println(myCollection.DrawingOfPrizes());
 
 //        priorityQueue.add(myToy1);
 //        priorityQueue.add(myToy2);

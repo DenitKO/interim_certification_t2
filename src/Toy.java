@@ -1,32 +1,32 @@
 import java.util.Objects;
 
-public class Toy implements Comparable<Toy>{
+public class Toy{
     private static int id_counter = 0;
     private final int id;
-    private int count;
-    private final String name;
     private int randomRatio;
+    private int value;
+    private final String name;
 
     {
         this.id = id_counter;
         this.id_counter +=1;
     }
 
-    public Toy(int randomRatio, int count, String name){
+    public Toy(int randomRatio, int value, String name){
         setRandomRatio(randomRatio);
-        setCount(count);
+        setValue(value);
         this.name = name;
     }
 
-    public Toy(int randomRatio, String name){
-        setRandomRatio(randomRatio);
-        this.count = 1;
+    public Toy(int value, String name){
+        this.randomRatio = 1;
+        setValue(value);
         this.name = name;
     }
 
     public Toy(String name){
         this.randomRatio = 1;
-        this.count = 1;
+        this.value = 1;
         this.name = name;
     }
 
@@ -34,18 +34,18 @@ public class Toy implements Comparable<Toy>{
         return this.id;
     }
 
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return this.value;
+    }
+
     public String getName() {
         return this.name;
     }
 
-    public int getCount() { return this.count; }
-
-    public void setCount(int count) {
-        if (count > 0){
-            this.count = count;
-        }
-        else System.out.println("Введите количество игрушек");
-    }
 
     public int getRandomRatio() { return this.randomRatio; }
 
@@ -56,14 +56,9 @@ public class Toy implements Comparable<Toy>{
     }
 
     @Override
-    public int compareTo(Toy other) {
-        return this.randomRatio-other.randomRatio;
-    }
-    @Override
     public String toString(){
-        return "Toy{" +
+        return "{" +
                 "id=" + this.id +
-                ", count=" + count +
                 ", name='" + name + '\'' +
                 ", randomRatio=" + randomRatio +
                 '}';
@@ -71,7 +66,7 @@ public class Toy implements Comparable<Toy>{
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, count, name, randomRatio);
+        return Objects.hash(id, value, name, randomRatio);
     }
 
     @Override
